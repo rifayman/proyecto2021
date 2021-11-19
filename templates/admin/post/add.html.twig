@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row pt-4">
+            <h4 style="margin-left:18px;">{% block titulo_seccion %}NUEVA PUBLICACIÓN{% endblock %}</h4>
+        </div>
+
+        {% if (form.vars.alerta is defined) %}
+            <div class="row">
+                <div class="col w-100 alert alert-danger">
+                    {{ form.vars.alerta | raw }}
+                </div>
+            </div>
+        {% endif %}
+        <div class="row">
+            {{ form_errors(form) }}
+        </div>
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'style': 'border: 1px grey solid; padding: 10px'}}) }}
+
+        <div class="row mt-2">
+            <div class="col-2">
+                <p>Título *</p>
+            </div>
+            <div class="col-10">
+                {{ form_widget(form.title) }}
+                {{ form_errors(form.title) }}
+                {{ form_help(form.title) }}
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-2">
+                <p>Descripción *</p>
+            </div>
+            <div class="col-10">
+                {{ form_widget(form.body, {'attr': {'style': 'width:50%; height: 100px'}}) }}
+                {{ form_errors(form.body) }}
+                <p class="help-text mt-2"><span class="fa fa-info-circle mt-2"> indique aquí el cuerpo de la publicación</span></p>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-2">
+                <p>Estado</p>
+            </div>
+            <div class="col-10">
+                {{ form_widget(form.state) }}
+                {{ form_errors(form.state) }}
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-2">
+                <p>Categoría</p>
+            </div>
+            <div class="col-10">
+                {{ form_widget(form.category) }}
+                {{ form_errors(form.category) }}
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-2">
+                <p>Fecha de Publicación</p>
+            </div>
+            <div class="col-10">
+                {{ form_widget(form.availability_day, {'attr': {'style': 'width: 30px; height: 22px'}}) }} -
+                {{ form_widget(form.availability_month) }} -
+                {{ form_widget(form.availability_year) }}
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-2">
+                <p>Imagen</p>
+            </div>
+            <div class="col-6">
+                {{ form_widget(form.image_file) }}
+            </div>
+            <div class="col-4">
+                {# Directamente del Objeto: #}
+                {# {% if (form.image.vars.value) %} #}
+                {# <img src="{{ '/uploads/' ~ form.image.vars.value }}" width="50"> #}
+                {# {% endif %} #}
+
+                {#                Desde una vble propia definida en la view:#}
+                {% if (form.vars.image_path) %}
+                    <img src="{{ form.vars.image_path }}" width="50">
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row mt-3">
+
+            <div class="col-2">
+                &nbsp;
+            </div>
+            <div class="col-8">
+                <input type="submit" value="Guardar" class="btn btn-primary">
+            </div>
+
+            <div class="col-2">
+                &nbsp;<a href="{{ path('admin_post_index') }}">Cancelar</a>
+            </div>
+
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

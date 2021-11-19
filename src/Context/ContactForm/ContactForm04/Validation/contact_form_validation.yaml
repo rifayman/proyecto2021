@@ -1,0 +1,7 @@
+# Ver archivo validations de config/packages/validation.yaml
+# Debe estar configurado este archivo en framework -> validation -> mappings -> paths
+App\Context\ContactForm\ContactForm04\DTO\ContactFormDTO:
+    properties:
+        firstName:
+            - NotNull:
+                message: 'First name is required, sorry about that!'

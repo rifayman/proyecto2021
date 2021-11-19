@@ -41,11 +41,18 @@ http://localhost:8000
 
 http://localhost:8080
 
-Usuario/Clave: root/root
+Usuario/Clave: admin/password
 
 **Acceso a e-mails enviados en modo local:**
 
 http://localhost:8025
+
+**Inicialización de base de datos en entorno dev**
+
+
+php bin/console doctrine:schema:drop --force --env=dev
+php bin/console doctrine:schema:update --force --env=dev
+php bin/console hautelook:fixtures:load --purge-with-truncate --env=dev
 
 ___
 
